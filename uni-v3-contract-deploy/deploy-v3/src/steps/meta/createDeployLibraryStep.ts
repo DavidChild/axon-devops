@@ -18,7 +18,6 @@ export default function createDeployLibraryStep({
       const library = await factory.deploy({ gasPrice, gasLimit: 6721975 })
       var start = (new Date()).getTime();
       while ((new Date()).getTime() - start < 10000) {
-        // 使用  continue 实现；
         continue;
       }
       console.log("library contract is ", library.address);
