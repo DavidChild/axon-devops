@@ -8,11 +8,8 @@ const UniswapV2Factory = require('.././uni-test/artifacts/contracts/Factory.sol/
 const UniswapV2Router02 = require('.././uni-test/artifacts/contracts/UniswapV2Router02.sol/UniswapV2Router02.json');
 const UniswapV2Pair = require('.././uni-test/artifacts/contracts/Factory.sol/IUniswapV2Pair.json');
 const Multicall = require('.././uni-test/artifacts/contracts/MultilCall.sol/Multicall.json');
-const configdata = fs.readFileSync('config.yml','utf8');
+const configdata = fs.readFileSync('config.yml', 'utf8');
 const configsetting = yaml.load(configdata);
-console.log(configsetting);
-console.log(configsetting.node_address);
-console.log(configsetting.hex_private_key);
 const endpoint = configsetting.node_address;
 const hexPrivateKey = configsetting.hex_private_key;
 

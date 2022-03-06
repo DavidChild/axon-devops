@@ -1,2 +1,2 @@
 deploy: 
-	ansible-playbook ./deploy-v3/deploy.yml
+	ansible-playbook deploy.yml
