@@ -1,0 +1,54 @@
+---
+- name: uni  deploy v3 contract
+  hosts: localhost
+  become: yes
+  become_method: sudo
+  vars_files:
+    - config.yml
+    - ../uni-contract-deploy/contract_address.yaml
+  tasks:
+  ###############################################################################################################
+    - name: delete the {{ clone_path }} 
+      shell: rm -rf {{ clone_path }}
+      become: yes
+      become_method: sudo
+
+    - name: mkdir {{ clone_path }}
+      shell: "mkdir -p {{ clone_path }}"
+      become: yes
+      become_method: sudo 
+
+    - name: Pull code
+      git:
+        repo: "git://github.com/DavidChild/deploy-v3.git"
+        dest: "{{ clone_path }}"
+        force: yes
+      become: yes
+      become_method: sudo
+
+    - name: yarn install
+      shell: "cd {{ clone_path }} && sudo npm install" 
+
+    - name: npm add web3
+      shell: "cd {{ clone_path }} && sudo npm add web3"
+
+    - name: delete the constract state.json
+      shell: rm -rf {{ clone_path }}/state.json
+      become: yes
+      become_method: sudo
+
+    - name: deploy uniswap v3 constracts.
+      shell: "cd {{ clone_path }} && yarn start -pk {{ hex_private_key }} -j {{ node_address }} -w9 {{ WETH }} -v2  {{ UniswapV2Factory }} -o  {{ hex_pub_address }} -s  ./state.json -ncl AT" 
+      become: yes
+      become_method: sudo
+
+    - name: delete and create the constract_address.yaml
+      shell: "rm -rf contract_address.yaml && touch contract_address.yaml"
+      become: yes
+      become_method: sudo
+
+    - name: copy the state.json file 
+      shell: "cp {{ clone_path }}/state.json contract_address.yaml"
+      become: yes
+      become_method: sudo
+
