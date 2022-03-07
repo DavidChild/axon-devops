@@ -25,8 +25,9 @@
 
     - name: Pull code
       git:
-        repo: "git://github.com/DavidChild/interface.git"
+        repo: "git://github.com/Uniswap/interface.git"
         dest: "{{ deploy_path }}"
+        version: "37e085763c2214a0d3b83bb366aaf73633870206"
         force: yes
       become: yes
       become_method: sudo

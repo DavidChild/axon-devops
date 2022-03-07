@@ -20,9 +20,40 @@
 
     - name: Pull code
       git:
-        repo: "git://github.com/DavidChild/deploy-v3.git"
+        repo: "git://github.com/Uniswap/deploy-v3.git"
         dest: "{{ clone_path }}"
+        version: "e66fdac7d9ff04c4f17c8d53bf428cb189c4c30a"
         force: yes
+      become: yes
+      become_method: sudo
+
+    - name: replace createDeployContractStep
+      shell: "cp ./code_files/createDeployContractStep.txt {{ clone_path }}/src/steps/meta/createDeployContractStep.ts"
+      become: yes
+      become_method: sudo
+
+    - name: replace createDeployLibraryStep
+      shell: "cp ./code_files/createDeployLibraryStep.txt {{ clone_path }}/src/steps/meta/createDeployLibraryStep.ts"
+      become: yes
+      become_method: sudo
+
+    - name: replace deploy-v3-core-factory.spec
+      shell: "cp ./code_files/deploy-v3-core-factory.spec.txt {{ clone_path }}/test/deploy-v3-core-factory.spec.ts"
+      become: yes
+      become_method: sudo
+      
+    - name: replace deploy
+      shell: "cp ./code_files/deploy.txt {{ clone_path }}/src/deploy.ts"
+      become: yes
+      become_method: sudo
+    
+    - name: replace index
+      shell: "cp ./code_files/index.txt {{ clone_path }}/index.ts"
+      become: yes
+      become_method: sudo
+
+    - name: replace migrations
+      shell: "cp ./code_files/migrations.txt {{ clone_path }}/src/migrations.ts"
       become: yes
       become_method: sudo
 
@@ -38,7 +69,7 @@
       become_method: sudo
 
     - name: deploy uniswap v3 constracts.
-      shell: "cd {{ clone_path }} && yarn start -pk {{ hex_private_key }} -j {{ node_address }} -w9 {{ WETH }} -v2  {{ UniswapV2Factory }} -o  {{ hex_pub_address }} -s  ./state.json -ncl AT" 
+      shell: "cd {{ clone_path }} && yarn start -pk {{ hex_private_key }} -j {{ node_address }} -w9 {{ WETH }} -v2  {{ UniswapV2Factory }} -o  {{ hex_pub_address }} -s  ./state.json -ncl AT -c 0" 
       become: yes
       become_method: sudo
 
