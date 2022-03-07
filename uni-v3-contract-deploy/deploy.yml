@@ -28,32 +28,32 @@
       become_method: sudo
 
     - name: replace createDeployContractStep
-      shell: "cp ./code_files/createDeployContractStep.txt {{ clone_path }}/src/steps/meta/createDeployContractStep.ts"
+      shell: "cp ./code_files/createDeployContractStep.ts {{ clone_path }}/src/steps/meta/createDeployContractStep.ts"
       become: yes
       become_method: sudo
 
     - name: replace createDeployLibraryStep
-      shell: "cp ./code_files/createDeployLibraryStep.txt {{ clone_path }}/src/steps/meta/createDeployLibraryStep.ts"
+      shell: "cp ./code_files/createDeployLibraryStep.ts {{ clone_path }}/src/steps/meta/createDeployLibraryStep.ts"
       become: yes
       become_method: sudo
 
     - name: replace deploy-v3-core-factory.spec
-      shell: "cp ./code_files/deploy-v3-core-factory.spec.txt {{ clone_path }}/test/deploy-v3-core-factory.spec.ts"
+      shell: "cp ./code_files/deploy-v3-core-factory.spec.ts {{ clone_path }}/test/deploy-v3-core-factory.spec.ts"
       become: yes
       become_method: sudo
       
     - name: replace deploy
-      shell: "cp ./code_files/deploy.txt {{ clone_path }}/src/deploy.ts"
+      shell: "cp ./code_files/deploy.ts {{ clone_path }}/src/deploy.ts"
       become: yes
       become_method: sudo
     
     - name: replace index
-      shell: "cp ./code_files/index.txt {{ clone_path }}/index.ts"
+      shell: "cp ./code_files/index.ts {{ clone_path }}/index.ts"
       become: yes
       become_method: sudo
 
     - name: replace migrations
-      shell: "cp ./code_files/migrations.txt {{ clone_path }}/src/migrations.ts"
+      shell: "cp ./code_files/migrations.ts {{ clone_path }}/src/migrations.ts"
       become: yes
       become_method: sudo
 

@@ -53,19 +53,19 @@
       
   ###############################################################################################################
     - name: Replace tokens templete
-      shell: sed -i "s/0xb00d616B820C39619Ee29e5144D0226Cf8B5c15A/{{ WETH }}/g" "./templates/tokens.txt"
+      shell: sed -i "s/0xb00d616B820C39619Ee29e5144D0226Cf8B5c15A/{{ WETH }}/g" "./templates/tokens.ts"
       tags: 
         - up
 
     - name: cp  src/constants/tokens.ts
-      shell: "cp ./templates/tokens.txt {{ deploy_path }}/src/constants/tokens.ts"
+      shell: "cp ./templates/tokens.ts {{ deploy_path }}/src/constants/tokens.ts"
       become: yes
       become_method: sudo
       tags: 
         - up
 
     - name: Replace tokens templete
-      shell: sed -i "s/0xb00d616B820C39619Ee29e5144D0226Cf8B5c15A/{{ WETH }}/g" "./templates/tokens.txt"
+      shell: sed -i "s/0xb00d616B820C39619Ee29e5144D0226Cf8B5c15A/{{ WETH }}/g" "./templates/tokens.ts"
       tags: 
         - up
 
