@@ -1,6 +1,8 @@
 import { ContractInterface, ContractFactory } from '@ethersproject/contracts'
 import { MigrationState, MigrationStep } from '../../migrations'
+import sleep from './sleep'
 const Web3 = require('web3')
+
 export default function createDeployLibraryStep({
   key,
   artifact: { contractName, abi, bytecode },
@@ -14,13 +16,8 @@ export default function createDeployLibraryStep({
     let contract_address = "";
     if (state[key] === undefined) {
       const factory = new ContractFactory(abi, bytecode, signer)
-
       const library = await factory.deploy({ gasPrice, gasLimit: 6721975 })
-      var start = (new Date()).getTime();
-      while ((new Date()).getTime() - start < 10000) {
-        // 使用  continue 实现；
-        continue;
-      }
+      sleep(10000);
       console.log("library contract is ", library.address);
       var receipt = await web3.eth.getTransactionReceipt(library.deployTransaction.hash);
       if (receipt != null) {
@@ -31,7 +28,7 @@ export default function createDeployLibraryStep({
         contract_address = library.address
       }
 
-      state[key] =contract_address;
+      state[key] = contract_address;
       return [
         {
           message: `Library ${contractName} deployed`,
