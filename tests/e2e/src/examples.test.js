@@ -6,7 +6,10 @@ describe("Metamask", () => {
       chainId: 5,
     });
 
-    await Promise.all([page.goto("http://localhost:8080"), page.bringToFront()]);
+    await Promise.all([
+      page.goto("http://localhost:8080"),
+      page.bringToFront(),
+    ]);
   });
 
   test("net_version", async () => {
@@ -16,6 +19,8 @@ describe("Metamask", () => {
       () => document.getElementById("chainId").innerText !== "",
     );
 
-    await expect(page.$eval("#chainId", (e) => e.innerText)).resolves.toBe("0x5");
+    await expect(page.$eval("#chainId", (e) => e.innerText)).resolves.toBe(
+      "0x5",
+    );
   });
 });
